@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "813572183484",
+    "firebase_url": "https://prototype-trivia-spin-logic-default-rtdb.firebaseio.com",
+    "project_id": "prototype-trivia-spin-logic",
+    "storage_bucket": "prototype-trivia-spin-logic.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813572183484:android:b3dac4d9bda2a2a50407b9",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.PrototypeTriviaSpinLogic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH1KC9vLwi0wK58kMcO4_W2oztWxMybu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
