@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 852b4c8a99f24a35acb29459fa183be2, type: 3}
+  m_Name: MiniGameDatabase
+  m_EditorClassIdentifier: 
+  _miniGameVos:
+  - Description: What is the largest planet in our solar system?
+    MiniGameItemVos:
+    - Description: Mercury
+      IsCorrectAnswer: 0
+    - Description: Venus
+      IsCorrectAnswer: 0
+    - Description: Jupiter
+      IsCorrectAnswer: 1
+    - Description: Saturn
+      IsCorrectAnswer: 0
+  - Description: Who wrote Romeo and Juliet?
+    MiniGameItemVos:
+    - Description: Mark Twain
+      IsCorrectAnswer: 0
+    - Description: William Shakespeare
+      IsCorrectAnswer: 1
+    - Description: Charles Dickens
+      IsCorrectAnswer: 0
+    - Description: Oscar Wilde
+      IsCorrectAnswer: 0
+  - Description: "Which element has the chemical symbol \u201CO\u201D?"
+    MiniGameItemVos:
+    - Description: Gold
+      IsCorrectAnswer: 0
+    - Description: Oxygen
+      IsCorrectAnswer: 1
+    - Description: Osmium
+      IsCorrectAnswer: 0
+    - Description: Opal
+      IsCorrectAnswer: 0
+  - Description: What color do you get when you mix red and blue?
+    MiniGameItemVos:
+    - Description: Yellow
+      IsCorrectAnswer: 0
+    - Description: Green
+      IsCorrectAnswer: 0
+    - Description: Purple
+      IsCorrectAnswer: 1
+    - Description: Orange
+      IsCorrectAnswer: 0
+  - Description: Which ocean is the largest?
+    MiniGameItemVos:
+    - Description: Atlantic Ocean
+      IsCorrectAnswer: 0
+    - Description: Indian Ocean
+      IsCorrectAnswer: 0
+    - Description: Arctic Ocean
+      IsCorrectAnswer: 0
+    - Description: Pacific Ocean
+      IsCorrectAnswer: 1

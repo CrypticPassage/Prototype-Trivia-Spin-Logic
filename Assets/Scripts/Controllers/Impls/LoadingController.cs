@@ -19,7 +19,7 @@ namespace Controllers.Impls
         private IEnumerator LoadNextScene()
         {
             if (SceneLoader.NextSceneName == SceneNames.MinigameScene) 
-                yield return GetValueFromFirebaseDatabase(FirebaseDatabaseKeys.AnswersCount);
+                yield return GetIntValueFromFirebaseDatabase(FirebaseDatabaseKeys.AnswersCount);
             
             var time = 0f;
             
@@ -34,7 +34,7 @@ namespace Controllers.Impls
             SceneLoader.LoadSceneByName(SceneLoader.NextSceneName);
         }
         
-        private static IEnumerator GetValueFromFirebaseDatabase(string key)
+        private static IEnumerator GetIntValueFromFirebaseDatabase(string key)
         {
             var task = FirebaseDatabaseUtils.GetValueFromDatabase(key);
             
@@ -54,7 +54,38 @@ namespace Controllers.Impls
                 yield break;
             }
 
-            Debug.Log($"Got value from database: {task.Result} with type: {task.Result.GetType().Name}");
+            int value = 0;
+            
+            try
+            {
+                switch (task.Result)
+                {
+                    case int intVal:
+                        value = intVal;
+                        break;
+                    case long longVal:
+                        value = (int)longVal;
+                        break;
+                    case double doubleVal:
+                        value = Mathf.RoundToInt((float)doubleVal);
+                        break;
+                    case string strVal when int.TryParse(strVal, out var parsed):
+                        value = parsed;
+                        break;
+                    default:
+                        Debug.LogWarning($"Unexpected type from Firebase: {task.Result.GetType().Name}");
+                        yield break;
+                }
+
+                PlayerPrefs.SetInt(PlayerPrefsKeys.AnswersCount, value);
+                PlayerPrefs.Save();
+
+                Debug.Log($"Got value from database: {value} (original type: {task.Result.GetType().Name})");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"Error converting Firebase result to int: {e.Message}");
+            }
         }
     }
 }
