@@ -18,7 +18,7 @@ namespace Controllers.Impls
 
         private IEnumerator LoadNextScene()
         {
-            if (SceneLoader.NextSceneName == SceneNames.MenuScene) 
+            if (SceneLoader.NextSceneName == SceneNames.MinigameScene) 
                 yield return GetValueFromFirebaseDatabase(FirebaseDatabaseKeys.AnswersCount);
             
             var time = 0f;
@@ -36,7 +36,7 @@ namespace Controllers.Impls
         
         private static IEnumerator GetValueFromFirebaseDatabase(string key)
         {
-            var task = FirebaseDatabaseUtils.GetValueFromDatabaseAsync(key);
+            var task = FirebaseDatabaseUtils.GetValueFromDatabase(key);
             
             yield return new WaitUntil(() => task.IsCompleted);
             

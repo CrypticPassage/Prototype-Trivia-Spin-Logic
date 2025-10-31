@@ -6,7 +6,7 @@ namespace Utils
 {
     public static class FirebaseDatabaseUtils
     {
-        public static async Task<object> GetValueFromDatabaseAsync(string key)
+        public static async Task<object> GetValueFromDatabase(string key)
         {
             try
             {

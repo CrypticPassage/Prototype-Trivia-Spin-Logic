@@ -9,10 +9,8 @@ namespace Utils
         public static string NextSceneName => _nextSceneName;
         
 
-        public static void SetNextScene(string sceneName)
-        {
-            _nextSceneName = sceneName;
-        }
+        public static void SetNextScene(string sceneName) 
+            => _nextSceneName = sceneName;
         
         public static void LoadSceneByName(string sceneName)
         {
