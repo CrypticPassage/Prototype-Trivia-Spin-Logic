@@ -2,6 +2,9 @@
 
 namespace Utils
 {
+    /// <summary>
+    /// Утиліта, що зберігає в собі назву наступної сцени та містить метод завантаження її.
+    /// </summary>
     public static class SceneLoader
     {
         private static string _nextSceneName = string.Empty;

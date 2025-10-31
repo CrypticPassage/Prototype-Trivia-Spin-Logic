@@ -7,6 +7,11 @@ using Views;
 
 namespace Controllers.Impls
 {
+    /// <summary>
+    /// Даний контроллер відповідає за логіку сцени меню.
+    /// Було створено окремий Handler для логіки роботи спіна.
+    /// При росширенні проєкту рекомендується також виділяти в окремі класи Views такі фічі, як Spin.
+    /// </summary>
     public class MenuController : MonoBehaviour, IMenuController
     {
         [SerializeField] private MenuView _menuView;

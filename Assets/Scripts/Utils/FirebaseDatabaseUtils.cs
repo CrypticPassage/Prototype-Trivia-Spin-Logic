@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Utils
 {
+    /// <summary>
+    /// Утиліта, що містить асинхронний метод завантаження даних по ключу з Firebase Database
+    /// </summary>
     public static class FirebaseDatabaseUtils
     {
         public static async Task<object> GetValueFromDatabase(string key)

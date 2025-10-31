@@ -8,6 +8,9 @@ using Random = UnityEngine.Random;
 
 namespace Handlers.Impls
 {
+    /// <summary>
+    /// Даний handler містить в собі логіку роботи спіна.
+    /// </summary>
     public class SpinHandler : MonoBehaviour, ISpinHandler
     {
         [SerializeField] private GameSettingsDatabase _gameSettingsDatabase;

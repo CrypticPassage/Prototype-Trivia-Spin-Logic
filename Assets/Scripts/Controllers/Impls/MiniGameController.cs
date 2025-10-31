@@ -8,6 +8,9 @@ using Views;
 
 namespace Controllers.Impls
 {
+    /// <summary>
+    /// Даний контроллер відповідає за логіку сцени міні гри.
+    /// </summary>
     public class MiniGameController : MonoBehaviour, IMiniGameController
     {
         [SerializeField] private MiniGameView _miniGameView;
