@@ -1,5 +1,7 @@
 ﻿using Databases.Impls;
 using Items;
+using Models;
+using Services.Impls;
 using UnityEngine;
 using Utils;
 using Views;
@@ -9,11 +11,11 @@ namespace Controllers.Impls
     public class MiniGameController : MonoBehaviour, IMiniGameController
     {
         [SerializeField] private MiniGameView _miniGameView;
+        [SerializeField] private LoadingService _loadingService;
         [SerializeField] private MiniGameDatabase _miniGameDatabase;
         
+        private MiniGameVo _lastItemVo;
         private int _correctAnswersAmountPerLevel;
-        private int _lastQuizIndex;
-        private bool _isFirstQuestion;
         
         private void Start()
         {
@@ -26,14 +28,19 @@ namespace Controllers.Impls
         {
             foreach (var item in _miniGameView.MiniGameItems)
                 item.ClickButton.onClick.AddListener(() => OnItemButtonClick(item));
+            
+            _miniGameView.CloseButton.onClick.AddListener(OnCloseButtonClick);
         }
+
+        private void OnCloseButtonClick() 
+            => _loadingService.LoadScene(SceneNames.MenuScene);
 
         private void SetCommonData()
         {
             var answersCount = PlayerPrefs.GetInt(PlayerPrefsKeys.AnswersCount);
             var level = PlayerPrefs.GetInt(PlayerPrefsKeys.MiniGameLevel);
             
-            _miniGameView.SetCommonData(level.ToString(), answersCount.ToString());
+            _miniGameView.SetCommonData(level.ToString(), answersCount.ToString(), _correctAnswersAmountPerLevel.ToString());
         }
 
         private void SetQuizData()
@@ -42,15 +49,13 @@ namespace Controllers.Impls
             {
                 var index = Random.Range(0, _miniGameDatabase.MiniGameVos.Length);
 
-                if (!_isFirstQuestion && index == _lastQuizIndex)
+                if ( _lastItemVo == _miniGameDatabase.MiniGameVos[index])
                     continue;
 
                 var data = _miniGameDatabase.MiniGameVos[index];
-
-                _isFirstQuestion = true;
-                _lastQuizIndex = index;
-                _miniGameView.SetQuizData(data);
                 
+                _lastItemVo = data;
+                _miniGameView.SetQuizData(data);
                 break;
             }
         }
@@ -69,13 +74,18 @@ namespace Controllers.Impls
             if (_correctAnswersAmountPerLevel >= answersCount)
                 UpdateLevelData();
                 
+            _miniGameView.UpdateCorrectAnswersAmountPerLevel(_correctAnswersAmountPerLevel.ToString());
             SetQuizData();
         }
 
         private void UpdateLevelData()
         {
+            var oldLevel = PlayerPrefs.GetInt(PlayerPrefsKeys.MiniGameLevel);
+            var newLevel = oldLevel + 1;
+            
+            PlayerPrefs.SetInt(PlayerPrefsKeys.MiniGameLevel, newLevel);
+            _miniGameView.UpdateLevel(newLevel.ToString());
             _correctAnswersAmountPerLevel = 0;
-            _miniGameView.UpdateLevel();
         }
     }
 }

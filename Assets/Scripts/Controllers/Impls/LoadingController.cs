@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Databases.Impls;
 using UnityEngine;
 using Utils;
 using Views;
@@ -8,11 +9,14 @@ namespace Controllers.Impls
     public class LoadingController : MonoBehaviour, ILoadingController
     {
         [SerializeField] private LoadingView _loadingView;
+        [SerializeField] private GameSettingsDatabase _gameSettingsDatabase;
         
-        private float _loadingDuration = 2f;
+        private float _loadingDuration;
         
         private void Start()
         {
+            _loadingDuration = _gameSettingsDatabase.LoadingDuration;
+            
             StartCoroutine(LoadNextScene());
         }
 

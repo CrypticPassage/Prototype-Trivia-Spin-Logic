@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Databases.Impls;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
@@ -8,15 +9,10 @@ using Random = UnityEngine.Random;
 namespace Handlers.Impls
 {
     public class SpinHandler : MonoBehaviour, ISpinHandler
-    { 
-        // Spin Roll
-        private float _startSpinSpeed = 720f;
-        private float _decelerationSpinSpeed = 250f;
-        private float _randomSpinSpeedSpread = 0.15f;
+    {
+        [SerializeField] private GameSettingsDatabase _gameSettingsDatabase;
         
-        // Spin Cooldown
         private DateTime _nextAvailableTime;
-        private int _spinCooldown = 10;
         private bool _isSpinning;
         private bool _isCooldownActive;
         
@@ -54,12 +50,13 @@ namespace Handlers.Impls
         {
             _isSpinning = true;
             
-            var speed = Random.Range(600f, 900f) * Random.Range(1f - _randomSpinSpeedSpread, 1 + _randomSpinSpeedSpread);
-
+            var speed = Random.Range(_gameSettingsDatabase.SpinSpeedMinRange, _gameSettingsDatabase.SpinSpeedMaxRange) 
+                        * Random.Range(1f - _gameSettingsDatabase.RandomSpinSpeedOffset, 1 + _gameSettingsDatabase.RandomSpinSpeedOffset);
+            
             while (speed > 0f)
             {
                 spinImage.transform.Rotate(0f, 0f, -speed * Time.deltaTime);
-                speed -= _decelerationSpinSpeed * Time.deltaTime;
+                speed -= _gameSettingsDatabase.DecelerationSpinSpeed * Time.deltaTime;
                 
                 yield return null;
             }
@@ -70,7 +67,7 @@ namespace Handlers.Impls
 
         private void StartSpinCooldown()
         {
-            _nextAvailableTime = DateTime.UtcNow.AddSeconds(_spinCooldown);
+            _nextAvailableTime = DateTime.UtcNow.AddSeconds(_gameSettingsDatabase.SpinCooldownSec);
             
             PlayerPrefs.SetString(PlayerPrefsKeys.LastSpinTime, _nextAvailableTime.ToString("o"));
             PlayerPrefs.Save();

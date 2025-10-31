@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b606ed43754cc69a117f4118a4565b, type: 3}
   m_Name: GameSettingsDatabase
   m_EditorClassIdentifier: 
+  loadingDuration: 2
+  startSpinSpeed: 720
+  decelerationSpinSpeed: 250
+  randomSpinSpeedOffset: 0.15
+  spinSpeedMinRange: 600
+  spinSpeedMaxRange: 900
+  spinCooldownSec: 300

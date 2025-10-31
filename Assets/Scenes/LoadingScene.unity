@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadingView: {fileID: 1118001111}
+  _gameSettingsDatabase: {fileID: 11400000, guid: e15340c207f0fea489f0f7adbf97ab1d, type: 2}
 --- !u!4 &816429968
 Transform:
   m_ObjectHideFlags: 0
